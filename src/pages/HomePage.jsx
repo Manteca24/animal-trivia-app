@@ -1,13 +1,11 @@
 import React from "react";
 import IntroCard from "../components/IntroCard";
 
-const HomePage = () => {
+const HomePage = ({ username }) => {
   return (
-    <>
-      <div className="main">
-        <IntroCard />
-      </div>
-    </>
+    <div className="main">
+      <IntroCard username={username} />
+    </div>
   );
 };
 
