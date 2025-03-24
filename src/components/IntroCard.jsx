@@ -8,6 +8,7 @@ const IntroCard = () => {
   const [name, setName] = useState("");
   const [userNameInput, setUserNameInput] = useState("");
   const [topPlayers, setTopPlayers] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +20,8 @@ const IntroCard = () => {
         setTopPlayers(response.data.slice(0, 5)); // Only get top 5 players
       } catch (error) {
         console.error("Error fetching top players:", error);
+      } finally {
+        setLoading(false); // Set loading to false once the data is fetched
       }
     };
 
@@ -92,17 +95,23 @@ const IntroCard = () => {
 
       <div className="leaderboard">
         <h2>🏆 Top 5</h2>
-        <ul>
-          {topPlayers.length > 0 ? (
-            topPlayers.map((player, index) => (
-              <li key={index}>
-                {index + 1}. {player.name} - {player.highest_score} pts
-              </li>
-            ))
-          ) : (
-            <p>No scores yet!</p>
-          )}
-        </ul>
+        {loading ? (
+          <div className="spinner"></div> // Show spinner while loading
+        ) : (
+          <ul>
+            {topPlayers.length > 0 ? (
+              topPlayers.map((player, index) => (
+                <li key={index}>
+                  {index + 1}. {player.name} - {player.highest_score} pts
+                </li>
+              ))
+            ) : (
+              <p>
+                {language === "en" ? "No scores yet :-(" : "Nadie jugó :-("}
+              </p>
+            )}
+          </ul>
+        )}
       </div>
 
       <button className="customGameButton" onClick={handleNavigateToCustomPage}>

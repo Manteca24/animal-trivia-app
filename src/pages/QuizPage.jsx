@@ -12,8 +12,9 @@ const QuizPage = () => {
   const [startTime, setStartTime] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [cheetingMessage, setCheetingMessage] = useState("");
-  const [clickCounter, setClickCounter] = useState(0); // Track consecutive clicks
-  const [clickTime, setClickTime] = useState(0); // Track last click time
+  const [clickCounter, setClickCounter] = useState(0);
+  const [clickTime, setClickTime] = useState(0);
+  const [loading, setLoading] = useState(true); // Loading state for spinner
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -46,8 +47,10 @@ const QuizPage = () => {
         });
 
         setQuestions(shuffledQuestions);
+        setLoading(false); // Set loading to false once the questions are fetched
       } catch (error) {
         console.error("Error fetching questions:", error);
+        setLoading(false); // Set loading to false even if there's an error
       }
     };
 
@@ -180,12 +183,17 @@ const QuizPage = () => {
         <div className="cheeting-message">{cheetingMessage}</div>
       )}
 
-      {questions.length > 0 && !quizFinished && (
-        <QuestionCard
-          question={questions[currentQuestionIndex].question}
-          answers={questions[currentQuestionIndex].answerObjects}
-          onAnswer={handleAnswer}
-        />
+      {loading ? (
+        <div className="spinner"></div> // Show spinner while loading questions
+      ) : (
+        questions.length > 0 &&
+        !quizFinished && (
+          <QuestionCard
+            question={questions[currentQuestionIndex].question}
+            answers={questions[currentQuestionIndex].answerObjects}
+            onAnswer={handleAnswer}
+          />
+        )
       )}
     </div>
   );

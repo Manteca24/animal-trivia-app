@@ -184,6 +184,11 @@ font-size: 1rem;
   border-radius: 10px;
   border: 3px solid goldenrod;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .leaderboard ul {
@@ -200,6 +205,21 @@ font-size: 1rem;
   font-size: 1.8rem;
   margin-bottom: 15px;
   color: goldenrod; 
+}
+
+/*spinner*/
+.spinner {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #388e3c; /* Blue color */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /*language switcher*/
@@ -478,4 +498,5 @@ margin-left: 5px;
 .footerContent img{
   width: 40px;
 }
+
 
