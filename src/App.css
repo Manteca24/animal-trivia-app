@@ -19,6 +19,7 @@ body {
   align-items: center;
   background-image: url('assets/animal-background.png');
   background-size: cover; 
+  position: absolute;
 }
 
 /*main css*/
