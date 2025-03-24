@@ -110,7 +110,7 @@ h2 {
 
 
 /*buttons and inputs*/
-button {
+.button {
   padding: 10px 20px;
   margin: 5px;
   font-size: 1.2rem;
@@ -123,12 +123,12 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 }
 
-button:hover {
+.button:hover {
   background-color: #469f2c; 
   transform: scale(1.05);
 }
 
-button:focus {
+.button:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(74, 144, 226, 0.6); 
 }
@@ -152,7 +152,7 @@ select:focus {
   border-color: #4a90e2; 
 }
 
-button:disabled {
+.button:disabled {
   display: none;
 }
 
@@ -163,13 +163,27 @@ button:disabled {
 }
 
 .customGameButton{
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 background-color: #064d42;
 font-size: 1rem;
 } 
 .customGameButton:hover{
   background-color: #063830;
+  transform: scale(1.05);
+
 }
 
+.customGameButton:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.6); 
+}
 
 /*leaderboard*/
 
@@ -317,16 +331,46 @@ margin-left: 5px;
 
 .answer-button {
   font-family: "Finger Paint", sans-serif;
+  background: #f7f7f7;
+  border: 2px solid transparent;
+  color: black;
+  border-radius: 8px;
   font-size: 1rem;
   padding: 10px;
   margin: 5px;
   border: 1px solid #ccc;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
-.answer-button:hover {
-  transform: scale(1.05);
+.answer-button:hover{
+  transform: scale(1.1);
+}
+
+.answer-button-correct {
+  font-family: "Finger Paint", sans-serif;
+  background-color: green;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transform: scale(1.1);
+
+}
+
+.answer-button-incorrect {
+  font-family: "Finger Paint", sans-serif;
+  background-color: red;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 

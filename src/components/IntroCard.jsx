@@ -81,7 +81,7 @@ const IntroCard = () => {
         </h2>
       )}
 
-      <button onClick={handleStartQuiz} disabled={!name}>
+      <button className="button" onClick={handleStartQuiz} disabled={!name}>
         {language === "en" ? "Play to Score" : "Jugar para puntuar"}
       </button>
 

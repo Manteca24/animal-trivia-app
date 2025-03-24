@@ -15,6 +15,8 @@ const QuizPage = () => {
   const [clickCounter, setClickCounter] = useState(0);
   const [clickTime, setClickTime] = useState(0);
   const [loading, setLoading] = useState(true); // Loading state for spinner
+  const [selectedAnswer, setSelectedAnswer] = useState(null); // Track the selected answer
+  const [answerStatus, setAnswerStatus] = useState(null); // Track if answer is correct or wrong
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -81,9 +83,13 @@ const QuizPage = () => {
 
   const handleAnswer = (selectedLetter) => {
     const currentQuestion = questions[currentQuestionIndex];
+
+    // Find the selected answer object by its letter
     const selectedAnswerObj = currentQuestion.answerObjects.find(
       (ansObj) => ansObj.letter === selectedLetter
     );
+
+    // Compare the text of the selected answer with the correct answer
     const correct = selectedAnswerObj.text === currentQuestion.correct_answer;
     const timeTaken = (Date.now() - startTime) / 1000;
 
@@ -129,12 +135,18 @@ const QuizPage = () => {
         : `❌ Error! -3 puntos`
     );
 
+    // Set selected answer and answer status (correct or wrong)
+    setSelectedAnswer(selectedAnswerObj.text);
+    setAnswerStatus(correct);
+
     setTimeout(() => {
       setFeedbackMessage("");
       if (currentQuestionIndex + 1 < questions.length) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setStartTime(Date.now());
         setQuizFinished(false); // Reset quiz status to continue playing
+        setSelectedAnswer(null); // Reset selected answer
+        setAnswerStatus(null); // Reset answer status
       } else {
         finishQuiz();
       }
@@ -192,6 +204,8 @@ const QuizPage = () => {
             question={questions[currentQuestionIndex].question}
             answers={questions[currentQuestionIndex].answerObjects}
             onAnswer={handleAnswer}
+            selectedAnswer={selectedAnswer}
+            correctAnswer={questions[currentQuestionIndex].correct_answer} // pass the correct answer
           />
         )
       )}

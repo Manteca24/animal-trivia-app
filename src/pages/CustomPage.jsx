@@ -112,7 +112,7 @@ const CustomPage = () => {
       </select>
 
       {/* Start Quiz button */}
-      <button onClick={handleStartCustomQuiz}>
+      <button className="button" onClick={handleStartCustomQuiz}>
         {language === "en" ? "Start Custom Quiz" : "Iniciar Quiz Personalizado"}
       </button>
     </div>
