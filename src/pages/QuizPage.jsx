@@ -11,6 +11,9 @@ const QuizPage = () => {
   const [score, setScore] = useState(0);
   const [startTime, setStartTime] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [cheetingMessage, setCheetingMessage] = useState("");
+  const [clickCounter, setClickCounter] = useState(0); // Track consecutive clicks
+  const [clickTime, setClickTime] = useState(0); // Track last click time
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -71,7 +74,7 @@ const QuizPage = () => {
       finishQuiz();
     }
     return () => clearInterval(timer);
-  }, [countdown, quizFinished, score, navigate, questions.length]);
+  }, [countdown, quizFinished, questions.length]);
 
   const handleAnswer = (selectedLetter) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -80,6 +83,27 @@ const QuizPage = () => {
     );
     const correct = selectedAnswerObj.text === currentQuestion.correct_answer;
     const timeTaken = (Date.now() - startTime) / 1000;
+
+    // Check if the user clicked too fast
+    const currentTime = Date.now();
+    if (currentTime - clickTime < 500) {
+      setClickCounter((prevCount) => prevCount + 1);
+    } else {
+      setClickCounter(0); // Reset counter after a delay
+    }
+    setClickTime(currentTime);
+
+    // If clicked more than 6 times in a row, stop the game and show "Trampa"
+    if (clickCounter >= 5) {
+      setQuizFinished(true);
+      setCheetingMessage(
+        language === "en"
+          ? "❌ Tricking! You have been caught!"
+          : "❌ Estás haciendo trampa!"
+      );
+      return; // Stop the game immediately
+    }
+
     let points = correct ? 10 : -3;
     if (correct) {
       if (timeTaken <= 5) points += 5;
@@ -102,14 +126,16 @@ const QuizPage = () => {
         : `❌ Error! -3 puntos`
     );
 
-    setTimeout(() => setFeedbackMessage(""), 2000);
-
-    if (currentQuestionIndex + 1 < questions.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setStartTime(Date.now());
-    } else {
-      finishQuiz();
-    }
+    setTimeout(() => {
+      setFeedbackMessage("");
+      if (currentQuestionIndex + 1 < questions.length) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setStartTime(Date.now());
+        setQuizFinished(false); // Reset quiz status to continue playing
+      } else {
+        finishQuiz();
+      }
+    }, 700); // time before next question
   };
 
   const finishQuiz = () => {
@@ -121,14 +147,14 @@ const QuizPage = () => {
         .post(`${import.meta.env.VITE_BACKEND_URL}/score`, { name, score })
         .then((response) => {
           console.log(response.data);
-          // Navigate to the results page once the score is submitted
           navigate("/quiz-results");
         })
         .catch((error) => console.error("Error saving score:", error));
     } else {
-      navigate("/quiz-results"); // Navigate immediately if no name
+      navigate("/quiz-results");
     }
   };
+
   return (
     <div className="main">
       <img
@@ -148,6 +174,10 @@ const QuizPage = () => {
 
       {feedbackMessage && (
         <div className="feedback-message">{feedbackMessage}</div>
+      )}
+
+      {cheetingMessage && (
+        <div className="cheeting-message">{cheetingMessage}</div>
       )}
 
       {questions.length > 0 && !quizFinished && (

@@ -296,6 +296,7 @@ margin-left: 5px;
 
 .answer-button {
   font-family: "Finger Paint", sans-serif;
+  font-size: 1rem;
   padding: 10px;
   margin: 5px;
   border: 1px solid #ccc;
@@ -384,20 +385,14 @@ margin-left: 5px;
 
 /*correct and wrong message*/
 .feedback-message {
-  position: absolute;
-  top: 41%; 
-  left: 50%;
-  transform: translateX(-50%);
   padding: 10px;
   font-size: 1rem;
   font-weight: bold;
   color: white;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.116);
   border-radius: 8px;
-  display: inline-block;
-  text-align: center;
   animation: fadeInOut 2s ease-in-out;
-  white-space: nowrap;
+
 }
 
 @keyframes fadeInOut {
@@ -415,7 +410,15 @@ margin-left: 5px;
   }
 }
 
-
+.cheeting-message{
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: red;
+  background-color: rgba(0, 0, 0, 0.116);
+  border-radius: 8px;
+}
 
 /*congratulations for podium*/
 .celebration {
