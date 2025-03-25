@@ -50,6 +50,23 @@ body {
   transform: scale(0.9); 
 }
 
+.main2{
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffffad;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transform: scale(0.9); 
+}
+
 h1 {
   font-size: 2.5rem;
   color: #06443a; 

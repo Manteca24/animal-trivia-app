@@ -84,11 +84,11 @@ const IntroCard = ({ username }) => {
           </h2>
         )}
         <div className="jugarButtonDiv">
-          <img className="mono1" src="/mono2.png" alt="mono2" />
+          {/* <img className="mono1" src="/mono2.png" alt="mono2" /> */}
           <button className="buttonPlay" onClick={handleStartQuiz}>
             {language === "en" ? "Play" : "Jugar"}
           </button>
-          <img className="mono2" src="/mono2.png" alt="mono2" />
+          {/* <img className="mono2" src="/mono2.png" alt="mono2" /> */}
         </div>
       </div>
 

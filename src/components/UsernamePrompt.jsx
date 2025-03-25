@@ -16,13 +16,19 @@ const UsernamePrompt = ({ onUsernameSet }) => {
   };
 
   return (
-    <div className="main">
-      <img className="logoMono" src="mono.ico" alt="monoLogo" />
+    <div className="main2">
+      <h1>{language === "en" ? "Welcome!" : "¡Bienvenido!"}</h1>
+
+      {/* <img className="logoMono" src="mono2.png" alt="monoLogo" /> */}
       <h2>{language === "en" ? "What's your name?" : "¿Cómo te llamas?"}</h2>
       <div className="input-container">
         <input
           type="text"
-          placeholder={language === "en" ? "Your name" : "Tu nombre"}
+          placeholder={
+            language === "en"
+              ? "Write your name here"
+              : "Escribe aquí tu nombre"
+          }
           value={userNameInput}
           onChange={(e) => setUserNameInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmitName()}
